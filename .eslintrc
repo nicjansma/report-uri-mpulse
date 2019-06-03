@@ -1,0 +1,16 @@
+{
+    extends: "nicjansma",
+    env: {
+        node: true
+    },
+    parserOptions: {
+        ecmaVersion: 2017
+    },
+    rules: {
+        //
+        // Disabled
+        //
+        strict: "off",
+        "no-console": "off"
+    }
+}
