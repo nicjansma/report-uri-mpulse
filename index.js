@@ -29,6 +29,9 @@ fastify.post("/report/:apiKey", (request, reply) => {
     // Validate input
     //
     const body = request.body;
+    const ua = request.headers['user-agent'];
+    const ip = request.headers['x-forwarded-for'] || request.ip;
+
     if (!body) {
         return reply.send(new Error("No Request body"));
     }
@@ -56,11 +59,11 @@ fastify.post("/report/:apiKey", (request, reply) => {
 
     if (body && Array.isArray(body)) {
         for (let i = 0; i < body.length; i++) {
-            handleReport(body[i]);
+            handleReport(body[i], ua, ip);
             reportsHandled++;
         }
     } else {
-        handleReport(body);
+        handleReport(body, ua, ip);
         reportsHandled++;
     }
 
@@ -70,7 +73,7 @@ fastify.post("/report/:apiKey", (request, reply) => {
     });
 });
 
-function handleReport(body) {
+function handleReport(body, ua, ip) {
     console.log(body);
 
     //
@@ -82,7 +85,8 @@ function handleReport(body) {
         "rt.tstart": when,
         "rt.end": when,
         "http.initiator": "error",
-
+        ua: ua,
+        ip: ip
     };
 
     //
