@@ -29,8 +29,8 @@ fastify.post("/report/:apiKey", (request, reply) => {
     // Validate input
     //
     const body = request.body;
-    const ua = request.headers['user-agent'];
-    const ip = request.headers['x-forwarded-for'] || request.ip;
+    const ua = request.headers["user-agent"];
+    const ip = request.headers["x-forwarded-for"] || request.ip;
 
     if (!body) {
         return reply.send(new Error("No Request body"));
@@ -52,7 +52,9 @@ fastify.post("/report/:apiKey", (request, reply) => {
     if (!apps[apiKey]) {
         request.log.info(`Initializing ${apiKey}`);
 
-        apps[apiKey] = mPulse.init(apiKey, restApiSecretKey);
+        apps[apiKey] = mPulse.init(apiKey, restApiSecretKey, {
+            ua: "report-uri-mpulse"
+        });
     }
 
     let reportsHandled = 0;

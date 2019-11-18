@@ -1,6 +1,6 @@
 {
   "name": "report-uri-mpulse",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "fastify": "^2.4.1",
     "jsurl": "^0.1.5",
-    "mpulse": "^1.3.0"
+    "mpulse": "^1.3.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
